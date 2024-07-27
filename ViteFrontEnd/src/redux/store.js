@@ -2,6 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./features/api/apiSlice";
 import { googleSlice } from "./features/api/googleSlice";
+import { userSlice } from "./features/api/userSlice";
 import authReducer from "./features/auth/authSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -11,12 +12,13 @@ import themeReducer from "./features/theme/themeSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth","theme"], // Only persist auth, theme slice
+  whitelist: ["auth", "theme"], // Only persist auth, theme slice
 };
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   [googleSlice.reducerPath]: googleSlice.reducer,
+  [userSlice.reducerPath]: userSlice.reducer,
   auth: authReducer,
   theme: themeReducer,
 });
@@ -28,7 +30,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat([apiSlice.middleware,googleSlice.middleware]),
+    }).concat([apiSlice.middleware, googleSlice.middleware, userSlice.middleware]),
   devTools: process.env.NODE_ENV !== "production",
 });
 

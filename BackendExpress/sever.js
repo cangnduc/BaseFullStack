@@ -3,27 +3,28 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const path = require("path");
+
+var compression = require("compression");
 dotenv = require("dotenv").config();
 const connect = require("./config/mongoose.db.js");
 const morgan = require("morgan");
 const errorHandler = require("./middlewares/errorHandler.js");
-const {isLogin} = require("./middlewares/auth.middleware.js");
+const { isLogin } = require("./middlewares/auth.middleware.js");
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
   })
 );
-// Custom token to log only error responses
 
+// Custom token to log only error responses
 
 // Custom format to log error responses
 
-
 // Use morgan with the custom format
 
-
 // middleware
+app.use(compression());
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

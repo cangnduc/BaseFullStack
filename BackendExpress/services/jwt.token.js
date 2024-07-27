@@ -4,7 +4,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN;
 
 const generateAccessToken = (user) => {
-  return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+  return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "2m" });
 };
 
 const generateRefreshToken = (user) => {
@@ -25,3 +25,4 @@ module.exports = {
   verifyAccessToken,
   verifyRefreshToken,
 };
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndvcmtpbmdhdGdlbXMxQGdtYWlsLmNvbSIsImlkIjoiNjY5M2Q2MjVkZmNhYTNhODgzYmFhYTE5IiwidXNlcm5hbWUiOiJjYW5nIE5ndXllbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMjA4OTAwOSwiZXhwIjoxNzIyMDg5MDI0fQ.0eqIwQIBM_tSkRq66Zf12X2QaqGd-1fBT8-wAqmhbYg

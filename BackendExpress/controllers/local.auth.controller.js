@@ -9,11 +9,13 @@ const localAuthController = {
       loginSchema.parse(req.body);
       const { email, password } = req.body;
       const user = await userSchema.findOne({ email });
-
-      if (!user) {
+     
+      if (!user || user.hashedPassword === null) {
         return res.status(400).json({ message: "User does not exist" });
       }
+
       const validPassword = bcrypt.compare(password, user.passwordHash);
+     
       if (!validPassword) {
         return res.status(400).json({ message: "Invalid password" });
       }

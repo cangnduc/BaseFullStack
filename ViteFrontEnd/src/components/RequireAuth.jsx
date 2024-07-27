@@ -19,7 +19,7 @@ const RequireAuth = ({ allowedRoles }) => {
           
           const result = await refresh().unwrap();
         
-          dispatch(setCredentials({ user: result.data.user, accessToken: result.data.accessToken }));
+          //dispatch(setCredentials({ user: result.data.user, accessToken: result.data.accessToken }));
         } catch (error) {
           
           dispatch(logout());

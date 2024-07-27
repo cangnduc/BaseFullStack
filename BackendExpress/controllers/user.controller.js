@@ -15,6 +15,7 @@ const userController = {
       if (req.user.role !== "admin" && req.user.id !== id) {
         return res.status(403).json({ message: "Not authorized to get other user" });
       }
+
       res.status(200).json({ message: "User found", user });
     } catch (error) {
       res.status(500).json({ message: "Internal server error", error });
@@ -23,6 +24,7 @@ const userController = {
   getUsers: async (req, res) => {
     try {
       const users = await userSchema.find();
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       res.status(200).json({ message: "Users found", users });
     } catch (error) {
       res.status(500).json({ message: "Internal server error", error });
