@@ -1,0 +1,12 @@
+/* App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: 'Roboto', sans-serif;
+  @apply bg-slate-100 border-gray-500;
+}
+body.dark {
+   @apply bg-gray-800 text-slate-200
+}
+/* src/global.css */

@@ -1,0 +1,42 @@
+POST http://localhost:3000/api/auth/local/login
+Content-Type: application/json
+
+{
+  "email": "workingatgems1@gmail.com",
+  "password": "Timeisendless1"
+}
+####
+
+
+POST http://localhost:3000/api/auth/local/login
+Content-Type: application/json
+
+{
+  "email": "workingatgems1@gmail.com",
+  "password": "Timeisendless1"
+}
+####
+
+GET http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndvcmtpbmdhdGdlbXMxQGdtYWlsLmNvbSIsImlkIjoiNjY5M2Q2MjVkZmNhYTNhODgzYmFhYTE5IiwidXNlcm5hbWUiOiJjYW5nIE5ndXllbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMjA2MjY2OCwiZXhwIjoxNzIyMDYzMjY4fQ._II3BERwJwnaJ3_soCrpNsi0v60ZkpEE7hzEuFfFlzI
+
+
+###
+//Add Product
+POST http://localhost:3000/api/product
+Content-Type: application/json
+
+{
+  "name": "Product 2",
+  "price": "300",
+  "description": "Product 1 description",
+  "categoryId": "Category 1",
+  "image": "https://via.placeholder.com/150"
+}
+
+####
+
+//Get All Products
+
+GET http://localhost:3000/api/product
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndvcmtpbmdhdGdlbXMxQGdtYWlsLmNvbSIsImlkIjoiNjY5M2Q2MjVkZmNhYTNhODgzYmFhYTE5IiwidXNlcm5hbWUiOiJjYW5nIE5ndXllbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTIxMTg2MywiZXhwIjoxNzIxMjE1NDYzfQ.tf27Yw2fwlN_8l65sBNb9c4x4Yb1eqFUAqZ3w8gr-P8
