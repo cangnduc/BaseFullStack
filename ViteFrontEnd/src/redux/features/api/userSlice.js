@@ -1,35 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout, setCredentials } from "../auth/authSlice";
 import { jwtDecode } from "jwt-decode";
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/api",
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.accessToken;
-
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
-});
-
-const baseQuerywithReauth = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-
-  if (result?.error || result?.error?.status === 401) {
-    const refreshResult = await baseQuery({ url: "/auth/refreshToken", method: "POST", credentials: "include" }, api, extraOptions);
-
-    if (refreshResult.data) {
-      api.dispatch(setCredentials({ user: refreshResult.data.data.user, accessToken: refreshResult.data.data.accessToken }));
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      api.dispatch(logout());
-    }
-  }
-
-  return result;
-};
+import { baseQuerywithReauth } from "./apiSlice";
 
 export const userSlice = createApi({
   reducerPath: "userApi",
@@ -37,6 +9,13 @@ export const userSlice = createApi({
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => "/user",
+      transformResponse: (response) => {
+        return response.users;
+      },
+      transformErrorResponse: (response) => {
+        return response.data.error.errorsResponse.keyValue;
+      },
+      providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: "User", id })), { type: "User", id: "LIST" }] : [{ type: "User", id: "LIST" }]),
     }),
     getUser: builder.query({
       query: (id) => `/user/${id}`,
@@ -48,13 +27,25 @@ export const userSlice = createApi({
         body: patch,
       }),
     }),
+    addUser: builder.mutation({
+      query: (body) => ({
+        url: "/user",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [{ type: "User", id: "LIST" }],
+    }),
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `/user/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags:(result, error,id) => [
+        { type: "User", id },
+        { type: "User", id: "LIST" },
+      ],
     }),
   }),
 });
 
-export const { useGetUsersQuery, useGetUserQuery, useUpdateUserMutation, useDeleteUserMutation } = userSlice;
+export const { useGetUsersQuery, useGetUserQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation } = userSlice;

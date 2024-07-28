@@ -5,6 +5,8 @@ import { Provider, useSelector } from "react-redux";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Login from "./pages/Login/Login";
 import Blog from "./pages/Blog/Blog";
 import Admin from "./pages/Admin/Admin";
@@ -43,6 +45,7 @@ function App() {
                 <Route path="/admin" element={<Admin />} />
               </Route>
             </Routes>
+            <ToastContainer />
           </Router>
         </ThemeProvider>
       </PersistGate>

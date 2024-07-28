@@ -7,7 +7,7 @@ const { isLogin, isAdmin, autherized } = require("../middlewares/auth.middleware
 
 router.get("/", autherized('admin'),  userController.getUsers);
 router.get("/:id", autherized(["admin", "user"]), userController.getUserById);
-router.post("/",autherized(['admin']), userController.addUser);
+router.post("/", userController.addUser);
 router.put("/:id",autherized(['admin','user']), userController.updateUser);
 router.delete("/:id",autherized(['admin']), userController.deleteUser);
 module.exports = router;

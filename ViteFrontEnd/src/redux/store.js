@@ -8,7 +8,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
 import themeReducer from "./features/theme/themeSlice";
-
+import isUpdateReducer from "./features/generalState";
 const persistConfig = {
   key: "root",
   storage,
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   [userSlice.reducerPath]: userSlice.reducer,
   auth: authReducer,
   theme: themeReducer,
+  isUpdate: isUpdateReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -4,12 +4,9 @@ import { cn } from "@/lib/utils"
 
 const Table = React.forwardRef(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">
-    <table
-      ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
-      {...props} />
+    <table ref={ref} className={cn("w-full caption-bottom text-sm ", className)} {...props} />
   </div>
-))
+));
 Table.displayName = "Table"
 
 const TableHeader = React.forwardRef(({ className, ...props }, ref) => (
@@ -20,7 +17,7 @@ TableHeader.displayName = "TableHeader"
 const TableBody = React.forwardRef(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
+    className={cn("", className)}
     {...props} />
 ))
 TableBody.displayName = "TableBody"
@@ -34,14 +31,8 @@ const TableFooter = React.forwardRef(({ className, ...props }, ref) => (
 TableFooter.displayName = "TableFooter"
 
 const TableRow = React.forwardRef(({ className, ...props }, ref) => (
-  <tr
-    ref={ref}
-    className={cn(
-      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-      className
-    )}
-    {...props} />
-))
+  <tr ref={ref} className={cn("hover:bg-blue-300 dark:hover:bg-blue-950 transition-colors border border-blue-500 dark:border-blue-200", className)} {...props} />
+));
 TableRow.displayName = "TableRow"
 
 const TableHead = React.forwardRef(({ className, ...props }, ref) => (

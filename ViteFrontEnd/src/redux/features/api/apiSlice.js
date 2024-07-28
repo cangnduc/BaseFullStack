@@ -13,13 +13,14 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQuerywithReauth = async (args, api, extraOptions) => {
+export const baseQuerywithReauth = async (args, api, extraOptions) => {
+  
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error || result?.error?.status === 401) {
    
     const refreshResult = await baseQuery({ url: "/auth/refreshToken", method: "POST", credentials: "include" }, api, extraOptions);
-    console.log("refreshResult", refreshResult);
+   
     if (refreshResult.data) {
       api.dispatch(setCredentials({ user: refreshResult.data.data.user, accessToken: refreshResult.data.data.accessToken }));
       result = await baseQuery(args, api, extraOptions);
